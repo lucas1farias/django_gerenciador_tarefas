@@ -1,0 +1,78 @@
+
+
+{% extends 'main.html' %}
+{% block page-title %}Página Inicial{% endblock %}
+{% block content %}
+
+  <style>
+    body {
+      background-color: #222;
+      font-family: consolas;
+    }
+
+    /*Linha abaixo do texto "Você está anônimo"*/
+    hr {
+      background-color: #fffc00;
+      height: 3px;
+      box-shadow: 0 0 50px #fffc00;
+      border-radius: 10px;
+    }
+
+    /*Linha abaixo do texto "Olá, acesse suas tarefas abaixo!"*/
+    .hr-custom {
+      background-color: cyan;
+      height: 3px;
+      box-shadow: 0 0 50px cyan;
+      border-radius: 10px;
+    }
+
+    .hr-custom-not-logged {
+      background-color: gray;
+      height: 3px;
+      box-shadow: 0 0 50px gray;
+      border-radius: 10px;
+    }
+  </style>
+
+  <!-- # ah_2: Usuário não logado: Informar anônimato, criar botões de criar conta e logar -->
+  {% if request.user.is_anonymous == True %}
+    <div class="container mt-5 text-center">
+      <h2 class="text-secondary">Você está anônimo</h2>
+      <hr class="hr-custom-not-logged">
+      <p class="text-secondary">Para acessar o site, crie uma conta.</p>
+      <!-- # ai_9: Criar conta (botão que acessa o template) (visível caso usuário não esteja logado) -->
+      <a class="btn btn-primary" href="{% url 'signup' %}">Criar conta</a>
+      <!-- # aj_9: Logar na conta (botão que acessa o template) (visível caso usuário não esteja logado) -->
+      <a class="btn btn-success" href="{% url 'signin' %}">Login</a>
+    </div>
+
+  <!-- Usuário logado: Mostrar botão com nome do usuário e botão para deslogar -->
+  {% else %}
+    <div class="container mt-5">
+      <h2 class="text-info">Menu do usuário</h2>
+      <hr class="hr-custom">
+      <div class="row">
+
+        <!-- Bloco separador do botão de usuário logado e botão de logout -->
+        <div class="col-lg-3"></div>
+
+        <div class="col-lg-2 text-center">
+          <div class="username btn btn-dark">Logado como: {{ user }}</div>
+        </div>
+
+        <!-- # al_5: Anexação da rota de acesso das tarefas de um usuário na página principal -->
+        <div class="col-lg-2 text-center">
+          <a class="btn btn-info" href="{% url 'your-tasks' %}">Tarefas de {{ user }}</a>
+        </div>
+
+        <div class="col-lg-2 text-center">
+          <!-- # ak_5: Vincular a rota que efetua o saída do usuário à um botão -->
+          <div><a class="btn btn-danger" href="{% url 'signout' %}">Sair/Logout</a></div>
+        </div>
+
+        <div class="col-lg-3"></div>
+
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+
+
+<!-- LEIA: tutorial/templates/def tasks_table() -->
+<table class="table table-dark table-bordered">
+  
+  <thead>
+    <tr>
+      <th class="bg-secondary">Tarefa</th>
+      <th class="bg-info">Data de adição</th>
+      <th class="bg-primary">Última atualização</th>
+      <th class="bg-warning">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- al_2: _app/views.py/TasksListView/context_object_name -->
+    {% for task in user_tasks %}
+        <tr>
+          <td class="bg-success">{{ task.task }}</td>
+          <td>{{ task.created }}</td>
+          <td>{{ task.updated }}</td>
+
+          <td class="text-center">
+            <!-- # ao_3: Acesso ao template que edita uma tarefa de CADA objeto -->
+            <a class="btn btn-primary" href="{% url 'update-task' task.pk %}">editar</a>
+            <!-- # ap_3: Acesso ao template que remove uma tarefa de CADA objeto -->
+            <a class="btn btn-danger" href="{% url 'erase-task' task.pk %}">remover</a>
+          </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+
+</table>

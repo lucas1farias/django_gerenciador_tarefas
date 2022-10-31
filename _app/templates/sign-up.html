@@ -1,0 +1,58 @@
+
+
+{% extends 'main.html' %}
+{% block page-title %}Criar conta{% endblock %}
+{% block content %}
+  <style>
+    body {
+      background-color: #171A21;
+      font-family: consolas;
+      color: #c7d5e0;
+    }
+
+    h1 {
+      color: aqua;
+    }
+
+    /*Linha abaixo do texto "Criar conta"*/
+    hr {
+        background-color: aqua;
+        height: 3px;
+        box-shadow: 0 0 50px aqua;
+        border-radius: 10px;
+    }
+
+    /*Interior dos inputs*/
+    .form-control {
+        background-color: #171A21;
+    }
+
+    /*COR DA CAIXA NO INTERIOR DOS INPUTS QUANDO CLICADO DENTRO*/
+    .form-control:focus {
+        background-color: #171A21;
+    }
+  </style>
+
+  <!-- # ar_3: Botão na página de criar conta -->
+  {% include 'fixed-return-button.html' %}
+
+  <div class="container mt-5 text-center">
+    <h1>Criar conta</h1><hr>
+
+    <!-- # ai_7: Depois que criar a rota, vincular ela ao formulário do template -->
+    <form action="{% url 'signup' %}" autocomplete="off" id="this-form" method="post">
+      {% csrf_token %}
+      <!-- # ai_8: inclusão -->
+      {% include 'sign-up-form.html' %}
+    </form>
+
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <!-- Botão vinculado diretamente ao formulário acima via atributo "form" -->
+        <button class="btn btn-dark mt-5" form="this-form" type="submit">Registrar</button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+{% endblock %}

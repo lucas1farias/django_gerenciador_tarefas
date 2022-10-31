@@ -1,0 +1,122 @@
+
+
+{% extends 'main.html' %}
+{% block page-title %}Entrar{% endblock %}
+{% block content %}
+  <style>
+    body {
+      background-color: #171A21;
+      color: #0e3742;
+      font-family: consolas;
+    }
+
+    /*TEXTO: "Login"*/
+    fieldset {
+      font-size: 7rem;
+      color: #fff;
+      margin-bottom: 5rem;
+      text-shadow: 0 1px 10px #1b2838,
+                  0 2px 20px #2a475e,
+                  0 3px 0 #1b2838,
+                  0 4px 0 #2a475e,
+                  0 5px 0 #1b2838,
+                  0 6px 0 #2a475e,
+                  0 7px 0 #1b2838,
+                  0 8px 0 #2a475e,
+                  0 9px 0 #1b2838,
+                  0 10px 0 #2a475e;
+    }
+
+    /*TEXTOS: "Nome de usuário" e "Senha" (em "sign-in-form.html")*/
+    .blink-text {
+      animation: blink-text linear infinite 2s;
+    }
+
+    /*Interior dos inputs*/
+    .form-control {
+      background-color: #171A21;
+    }
+
+    /*Interior dos inputs ao ser clicado*/
+    .form-control:focus {
+      background-color: #222;
+    }
+
+    /*BOTÃO: Voltar à página inicial*/
+    .return-button-div-setup {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 17%; /*Customizar o tamanho horizontal que o botão fixo ocupa*/
+      background-color: #171A21; /*cor do espaço horizontal (mudar cor para ver o tamanho real)*/
+    }
+
+    /*BOTÃO: Voltar à página inicial (cor de fundo == cor da div acima)*/
+    .button-color {
+      background-color: #171A21;
+    }
+
+    /*BOTÃO: Voltar à página inicial (efeitos)*/
+    .button-color:hover {
+      transition: linear 1s;
+      background-color: #171A21;
+      box-shadow: 0 0 2px cyan,
+                  0 0 5px cyan,
+                  0 0 7px cyan,
+                  0 0 10px cyan;
+    }
+
+    /*TEXTOS: "Nome de usuário" e "Senha" (animações)*/
+    @keyframes blink-text {
+      0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92% {
+        color: #fff; text-shadow: none;
+      }
+
+      18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100% {
+        color: #171A21;
+        text-shadow: 0 0 5px #03bcf4,
+                    0 0 6px #03bcf4,
+                    0 0 7px #03bcf4,
+                    0 0 8px #03bcf4,
+                    0 0 9px #03bcf4;
+        }
+    }
+  </style>
+
+  <!-- # ar_2: Botão na página de fazer login em conta -->
+  {% include 'fixed-return-button.html' %}
+
+  <div class="container">
+    <!-- # aj_7: Depois que criar a rota, vincular ela ao formulário do template -->
+    <form action="{% url 'signin' %}" autocomplete="off" id="this-form" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6"><fieldset class="text-center">Login</fieldset></div>
+        <div class="col-3"></div>
+      </div>
+
+      <!-- # aj_8: inclusão -->
+      {% include 'sign-in-form.html' %}
+
+      <div class="row">
+        <div class="col-5"></div>
+
+        <div class="col-2 text-center mt-2">
+          <button class="btn btn-dark" type="submit" form="this-form">Login</button>
+        </div>
+
+        <div class="col-5"></div>
+      </div>
+
+
+
+    <div class="row">
+      <div class="ma mt-3">
+
+      </div>
+    </div>
+
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+
+
+{% extends 'main.html' %}
+{% block page-title %}Criar tarefa{% endblock %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #171A21;
+    font-family: consolas;
+  }
+
+  /*Centralizar conteúdos internos ao formulário*/
+  .ma {
+    margin: auto;
+  }
+
+  /*TEXTO: Administrar tarefa*/
+  .top-text-setup {
+    color: #a8ce36; font-size: 3em;
+  }
+
+  h2 {
+    color: yellowgreen;
+  }
+
+  /*Linha abaixo do texto "Administrar tarefa"*/
+  hr {
+    background-color: yellowgreen;
+    height: 3px;
+    box-shadow: 0 0 50px yellowgreen;
+    border-radius: 10px;
+  }
+</style>
+
+<div class="container">
+    <div class="text-secondary text-center mb-5 mt-5">
+      <h2>Criar tarefa</h2><hr>
+    </div>
+
+    <div class="text-left">
+      <a class="btn btn-danger mt-3" href="{% url 'your-tasks' %}">Voltar as tarefas</a>
+    </div>
+
+    <p class="text-center text-warning mt-5">Adicionar nova tarefa</p>
+
+    <!-- <form id> vinculado a <button form> no terceiro "row" -->
+    <form autocomplete="off" id="this-form" method="post">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Ligado ao input no segundo "row" -->
+          <label class="sr-only" for="task">Adicionar uma nova tarefa</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 text-center">
+          <input type="text" class="form-control mb-2" id="task" name="task" placeholder="Escreva a nova tarefa aqui" required>
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-5"></div>
+        <div class="col-2 text-center">
+          <button class="btn btn-dark mt-3" form="this-form" type="submit">Salvar</button>
+        </div>
+        <div class="col-5"></div>
+      </div>
+
+    </form>
+</div>
+
+{% endblock %}

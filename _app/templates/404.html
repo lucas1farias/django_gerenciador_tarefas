@@ -1,0 +1,29 @@
+
+
+{% include 'main.html' %}
+{% block content %}
+
+  <style>
+    body {
+      background-color: #222;
+      color: orangered;
+    }
+
+    hr {
+      background-color: orangered;
+      height: 3px;
+      box-shadow: 0 0 50px orangered;
+      border-radius: 10px;
+    }
+
+    h3 {
+      color: orangered;
+    }
+  </style>
+
+  <div class="container mt-5">
+      <h3>Página não encontrada</h3><hr>
+      <a class="btn btn-light" href="{% url 'index' %}">Voltar à página inicial</a>
+  </div>
+
+{% endblock %}

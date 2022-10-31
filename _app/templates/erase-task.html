@@ -1,0 +1,39 @@
+
+
+{% extends 'main.html' %}
+{% block page-title %}Remover tarefa{% endblock %}
+{% block content %}
+  <style>
+    body {
+      background-color: #171A21;
+    }
+
+    hr {
+      background-color: #d32323;
+      height: 3px;
+      box-shadow: 0 0 50px #d32323;
+      border-radius: 10px;
+    }
+  </style>
+
+  <form autocomplete="off" method="post">
+    {% csrf_token %}
+      <div class="container mt-5 text-center">
+        <h2 class="text-danger">Deletar tarefa</h2>
+        <hr>
+        <p class="mt-5 text-danger">Você deseja remover a tarefa abaixo?</p>
+        <div class="row">
+          <!-- Uma linha com 2 colunas de espaços em branco nos cantos e com um texto entre dois botões -->
+          <div class="col-3"></div>
+          <div class="col-2">
+            <button class="btn btn-danger" type="submit">sim</button>
+          </div>
+          <div class="col-2 text-warning">{{ object }}</div>
+          <div class="col-2">
+            <a class="btn btn-primary" href="{% url 'your-tasks' %}">cancelar</a>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+  </form>
+{% endblock %}

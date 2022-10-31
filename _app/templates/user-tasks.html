@@ -1,0 +1,42 @@
+
+
+{% include 'main.html' %}
+{% block page-title %}Suas tarefas{% endblock %}
+{% block content %}
+
+  <style>
+    body {
+      background-color: #222;
+    }
+
+    .hr-custom {
+      background-color: red;
+      height: 3px;
+      box-shadow: 0 0 50px red;
+      border-radius: 10px;
+    }
+   </style>
+
+  <!-- # ar_4: Botão na página de exibir tarefas -->
+  {% include 'fixed-return-button.html' %}
+
+  <!-- # al_6: Banco de dados vazio (uso de uma var de contexto) _app/views.py/TasksListView/context['database'] -->
+  {% if tasks_database|length == 0 %}
+      <div class="container mt-5 text-center">
+        <h2 class="text-danger">Não há tarefas adicionadas!</h2>
+        <hr class="hr-custom">
+        <!-- # al_6: Guiar o usuário a criar uma nova tarefa -->
+        <a class="btn btn-primary" href="{% url 'create-task' %}">Adicionar tarefa</a>
+      </div>
+  <!-- # al_6: Banco de dados com algum objeto -->
+  {% else %}
+      <div class="container">
+        <h2 class="mb-5 mt-4 text-primary">Suas tarefas</h2>
+        <!-- # an_2: Depois de criar uma nova tarefa, dispor a tarefa neste template e também poder add + tarefas -->
+        <a class="btn btn-primary mb-4" href="{% url 'create-task' %}">Adicionar nova tarefa</a>
+        {% include 'tasks-table.html' %}
+        <!-- # aq_3: Depois de tudo estar configurado, agrupar itens para serem exibíveis de 5 em 5 por página -->
+        {% include 'pagination.html' %}
+      </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,78 @@
+
+
+# a_a: Instalações das dependências necessárias
+  . pip install django==3.2.13 django-bootstrap4 mysqlclient
+  . pip freeze > libs.txt
+  . django-admin startproject nome .
+  . django-admin startapp nome
+
+# ab_1: ver [config/settings.py, INSTALLED_APPS]
+
+# ac_3: ver [config/settings.py, TEMPLATES]
+# ac_1: [_app, criação pasta, nome=templates]
+# ac_2: [_app, criação arquivo, nome=index.html]
+
+# ad_1: ver [config/urls.py, urlpatterns]
+
+# ae_1: [_app/urls.py, criação arquivo, nome=urls.py]
+# ae_4: [_app/views.py, criação view, nome=IndexView]
+
+# a_f: Validações em configurações do pacote projeto e execução do servidor local
+  . python manage.py migrate
+  . python manage.py createsuperuser
+  . python manage.py runserver
+
+# ag_1: [_app/views.py/IndexView]: Adição de backend para detectar usuário
+
+# ah_1: [_app/index.html]: Adição de sintaxe Django para detectar usuário no template alvo
+
+(OBS): Por alguma razão estúpida, códigos comentados em template ainda geram erro no Django
+
+========== CONFIGURAÇÃO DO TEMPLATE PARA CRIAR CONTA ==========
+# ai: As siglas vão de _1 até _9
+# ai_1: [_app/templates]: Criação dos templates [sign-up.html, sign-up-form.html]
+# ai_6: O template 1 é registrado (view e rota). Já o 2 é incluído em 1 via sintaxe Django {% include %}
+
+========== CONFIGURAÇÃO DO TEMPLATE PARA FAZER LOGIN NA CONTA ==========
+# aj: As siglas vão de _1 até _
+# aj_1: [_app/templates]: Criação dos templates [sign-in.html, sign-in-form.html]
+# aj_6: O template 1 é registrado (view e rota). Já o 2 é incluído em 1 via sintaxe Django {% include %}
+
+========== CONFIGURAÇÃO DO BACKEND PARA LOGOUT DE CONTA ==========
+# ak: Ver as siglas de _1 até _5
+# ak: Para esta ação, não é preciso qualquer template, apenas a classe e um botão na página inicial ligada a isso
+# ak: Não consegui configurar o backend em forma de "class based view" sem gerar erro
+# ak: A solução foi criar uma "function based view" definida como "sign_out"
+
+========== CONFIGURAÇÃO DO TEMPLATE QUE CRIA E EXIBE TAREFAS REGISTRADAS ==========
+# al: Tarefas registradas significa que o projeto é um gerenciador de tarefas
+# al_1: [_apps/models.py]: Criação do modelo que registra tarefas de usuário
+
+# al_4: Pós criação de qualquer modelo, os comandos seguintes devem ser executados:
+ . python manage.py makemigrations
+ . python manage.py migrate
+ . python manage.py runserver
+
+# al_6: Criação do template: [user-tasks.html] que requer automaticamente a criar [create-task.html]
+# am_1: Configurar [create-task.html] para ser um formulário que registra um objeto ao banco "Tasks"
+# an_1: Em [user-tasks.html], é preciso incluir um novo template [tasks-table.html] para ver tarefas registradas
+
+========== CONFIGURAÇÃO DO TEMPLATE QUE EDITA TAREFAS REGISTRADAS ==========
+# ao_1: Criação do template: [edit-task.html]
+# ao_3: [edit-task.html] fica em [tasks-table.html] que fica em [user-task.html] por sintaxe Django {% include %}
+
+========== CONFIGURAÇÃO DO TEMPLATE QUE REMOVE TAREFAS REGISTRADAS ==========
+# ap_1: Criação do template: [remove-task.html]
+# ap_3: [erase-task.html] fica em [tasks-table.html] que fica em [user-task.html] por sintaxe Django {% include %}
+
+========== ADIÇÃO DA PAGINAÇÃO ==========
+# aq_1: Inserção de [pagination.html] em [user-tasks.html] para agrupar elementos em grupos menores
+# aq_1: Recurso configurado num template [pagination.html] e em class based view [_app/views.py/TasksListView/paginate_by]
+
+========== ADIÇÃO DO BOTÃO FIXO EM CADA TEMPLATE PARA RETORNAR AO TEMPLATE ÍNDICE ==========
+# ar_1: Configuração do template para um botão de retorno à página índice [_app/templates/fixed-return-button.html]
+
+========== CONFIGURAÇÃO DO BACKEND PARA TRATAR TEMPLATES SEM ROTA ==========
+# as_1: É preciso um template para informar que a página não existe [404.html]
+# as_1: Ver os outros ids dessa sigla
+# as_3: [config/settings.py] DEBUG = False / ALLOWED_HOSTS = ['*'] (caso contrário, não é possível ver)
